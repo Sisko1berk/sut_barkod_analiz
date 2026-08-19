@@ -1,0 +1,11 @@
+﻿# Python Sanal Ortam ve Cache
+venv/
+__pycache__/
+*.pyc
+
+# Üretilen Simülasyon Resimleri (Gereksiz yer kaplamasın)
+uretim_bandi/
+ayrilan_fireler/
+
+# VS Code
+.vscode/
