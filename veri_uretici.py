@@ -5,9 +5,15 @@ from barcode import Code128
 from barcode.writer import ImageWriter
 import random
 import shutil
+import json
 
 def uret_ve_boz():
-    hedef_klasor = 'uretim_bandi'
+    with open('config.json', 'r', encoding='utf-8') as f:
+        config = json.load(f)
+        
+    hedef_klasor = config['klasor_ayarlari']['uretim_bandi_klasoru']
+    toplam_urun = config['simulasyon_ayarlari']['uretilecek_toplam_kutu']
+    fire_ihtimali = config['simulasyon_ayarlari']['fire_ihtimali']
     
     if os.path.exists(hedef_klasor):
         shutil.rmtree(hedef_klasor)
@@ -18,7 +24,6 @@ def uret_ve_boz():
     
     saglam_sayisi = 0
     hatali_sayisi = 0
-    toplam_urun = 50 
     
     for i in range(1, toplam_urun + 1):
         barkod_verisi = f"SUT-2026-08-{i:04d}"
@@ -32,7 +37,7 @@ def uret_ve_boz():
         img = cv2.imread(f"{gecici_isim}.png")
         if img is None: continue
         
-        is_hatali = random.random() < 0.30
+        is_hatali = random.random() < fire_ihtimali
         
         if is_hatali:
             hatali_sayisi += 1
@@ -59,7 +64,7 @@ def uret_ve_boz():
     print(f"[+] Üretim Bandı Simülasyonu Tamamlandı!")
     print(f"    Üretilen Toplam Kutu : {toplam_urun}")
     print(f"    Sağlam Kutu          : {saglam_sayisi}")
-    print(f"    Gizli Hatalı Kutu    : {hatali_sayisi} (Bunları kalite kontrol motoru bulacak!)")
+    print(f"    Gizli Hatalı Kutu    : {hatali_sayisi}")
     
 if __name__ == '__main__':
     uret_ve_boz()

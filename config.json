@@ -1,0 +1,22 @@
+{
+    "klasor_ayarlari": {
+        "uretim_bandi_klasoru": "uretim_bandi",
+        "fire_klasoru": "ayrilan_fireler"
+    },
+    "veritabani_ayarlari": {
+        "db_ismi": "kalite_raporlari.db",
+        "kamera_id": "KAMERA_HAT-01_BANT-A"
+    },
+    "simulasyon_ayarlari": {
+        "uretilecek_toplam_kutu": 50,
+        "fire_ihtimali": 0.30
+    },
+    "cv_ayarlari": {
+        "threshold_degeri": 100,
+        "cerceve_kalinligi": 5,
+        "basarili_guven_skoru_min": 98.5,
+        "basarili_guven_skoru_max": 99.9,
+        "hatali_guven_skoru_min": 12.0,
+        "hatali_guven_skoru_max": 45.0
+    }
+}
