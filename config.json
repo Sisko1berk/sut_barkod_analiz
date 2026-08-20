@@ -17,6 +17,7 @@
         "basarili_guven_skoru_min": 98.5,
         "basarili_guven_skoru_max": 99.9,
         "hatali_guven_skoru_min": 12.0,
-        "hatali_guven_skoru_max": 45.0
+        "hatali_guven_skoru_max": 45.0,
+        "video_oynatma_gecikmesi_ms": 200
     }
 }
