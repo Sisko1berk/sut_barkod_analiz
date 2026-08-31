@@ -1,11 +1,15 @@
-﻿# Python Sanal Ortam ve Cache
+# Python Sanal Ortam ve Cache
 venv/
 __pycache__/
 *.pyc
-
+kalite_raporlari.db
 # Üretilen Simülasyon Resimleri (Gereksiz yer kaplamasın)
 uretim_bandi/
 ayrilan_fireler/
 
 # VS Code
 .vscode/
+
+# Yeni Eklenenler (Sistem Logları ve Geçici Dosyalar)
+logs/
+temp_barkod.png

@@ -9,7 +9,8 @@
     },
     "simulasyon_ayarlari": {
         "uretilecek_toplam_kutu": 50,
-        "fire_ihtimali": 0.30
+        "fire_ihtimali": 0.30,
+        "uretim_hizi_saniye": 1.0
     },
     "cv_ayarlari": {
         "threshold_degeri": 100,
