@@ -87,7 +87,6 @@ class SimulationProducer:
             
         self.logger.info(f"Üretim Bandı Simülasyonu Tamamlandı! Üretilen: {self.toplam_urun}, Sağlam: {saglam_sayisi}, Hatalı: {hatali_sayisi}")
 
-# Geriye dönük uyumluluk veya bağımsız test için
 def uret_ve_boz(kuyruk=None):
     producer = SimulationProducer(kuyruk)
     producer.start_production()

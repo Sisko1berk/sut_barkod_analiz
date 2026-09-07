@@ -22,11 +22,9 @@ class QualityControlSystem:
         self.config = self._get_config()
         self.db = DatabaseManager()
         
-        # Klasörler
         self.bant_klasoru = self.config.get('klasor_ayarlari', {}).get('uretim_bandi_klasoru', 'uretim_bandi')
         self.fire_klasoru = self.config.get('klasor_ayarlari', {}).get('fire_klasoru', 'ayrilan_fireler')
         
-        # CV Ayarları
         cv_ayarlar = self.config.get('cv_ayarlari', {})
         self.cv_thresh = cv_ayarlar.get('threshold_degeri', 100)
         self.cv_kalinlik = cv_ayarlar.get('cerceve_kalinligi', 5)
@@ -61,12 +59,10 @@ class QualityControlSystem:
         print(f"{Fore.CYAN}{Style.BRIGHT}[*] YAPAY GÖRME KALİTE KONTROL MOTORU BAŞLATILDI\n")
         print(f"{Fore.YELLOW}[*] Bant sıfırlanıyor ve simülasyon arka planda başlatılıyor...{Style.RESET_ALL}")
         
-        # Fire klasörünü temizle
         if os.path.exists(self.fire_klasoru):
             shutil.rmtree(self.fire_klasoru)
         os.makedirs(self.fire_klasoru, exist_ok=True)
         
-        # Üretici Thread'ini Başlat
         producer = SimulationProducer(self.urun_kuyrugu)
         uretici_thread = threading.Thread(target=producer.start_production)
         uretici_thread.daemon = True
@@ -86,7 +82,6 @@ class QualityControlSystem:
         
     def ana_dongu(self):
         while True:
-            # Kuyruktan gelenleri al
             while not self.urun_kuyrugu.empty():
                 yeni_urun = self.urun_kuyrugu.get()
                 if yeni_urun is None:
@@ -139,7 +134,6 @@ class QualityControlSystem:
         
         if img is None:
             self.logger.warning(f"Okunamayan resim atlandı: {dosya_yolu}")
-            # return empty image so it doesn't crash
             return np.zeros((480, 640, 3), dtype=np.uint8)
             
         self.toplam_taranan += 1
@@ -203,7 +197,7 @@ class QualityControlSystem:
         if cv2.getWindowProperty(self.pencere_adi, cv2.WND_PROP_VISIBLE) < 1:
             self.logger.warning("Pencere manuel kapatıldı.")
             print(f"\n{Fore.YELLOW}[!] Pencere 'X' butonundan manuel olarak kapatildi. Çıkış yapılıyor...")
-            return True # Çıkış
+            return True
             
         if key == ord('q'):
             self.logger.info("'Q' ile çıkış yapıldı.")
@@ -240,7 +234,6 @@ class QualityControlSystem:
         print(f"{Fore.GREEN}[*] İzleme tamamlandı. Program güvenle kapatıldı.")
         self.logger.info(f"Sistem kapandı. Taranan: {self.toplam_taranan}, Fire: {self.hatali_sayisi}")
 
-# Geriye dönük uyumluluk
 def kalite_kontrol_baslat():
     system = QualityControlSystem()
     system.baslat()
