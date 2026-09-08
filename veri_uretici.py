@@ -24,7 +24,7 @@ class SimulationProducer:
             with open('config.json', 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            self.logger.error(f"Config dosyası okunamadı: {e}")
+            self.logger.error(f"Config dosyasi okunamadi: {e}")
             return {}
 
     def start_production(self):
@@ -32,7 +32,7 @@ class SimulationProducer:
             shutil.rmtree(self.hedef_klasor)
         os.makedirs(self.hedef_klasor, exist_ok=True)
 
-        self.logger.info("Gerçekçi üretim bandı simülasyonu başlıyor...")
+        self.logger.info("Gercekci uretim bandi simulasyonu basliyor...")
         
         saglam_sayisi = 0
         hatali_sayisi = 0
@@ -49,7 +49,7 @@ class SimulationProducer:
                 
                 img = cv2.imread(f"{gecici_isim}.png")
                 if img is None: 
-                    self.logger.warning(f"{gecici_isim}.png okunamadı, atlanıyor.")
+                    self.logger.warning(f"{gecici_isim}.png okunamadi, atlaniyor.")
                     continue
                 
                 is_hatali = random.random() < self.fire_ihtimali
@@ -77,7 +77,7 @@ class SimulationProducer:
                     self.kuyruk.put(f"{dosya_adi}.png")
                     time.sleep(self.uretim_hizi)
             except Exception as e:
-                self.logger.error(f"Ürün {i} üretilirken hata oluştu: {e}")
+                self.logger.error(f"Urun {i} uretilirken hata olustu: {e}")
                 
         if os.path.exists("temp_barkod.png"):
             os.remove("temp_barkod.png")
@@ -85,7 +85,7 @@ class SimulationProducer:
         if self.kuyruk is not None:
             self.kuyruk.put(None)
             
-        self.logger.info(f"Üretim Bandı Simülasyonu Tamamlandı! Üretilen: {self.toplam_urun}, Sağlam: {saglam_sayisi}, Hatalı: {hatali_sayisi}")
+        self.logger.info(f"Uretim Bandi Simulasyonu Tamamlandi! Uretilen: {self.toplam_urun}, Saglam: {saglam_sayisi}, Hatali: {hatali_sayisi}")
 
 def uret_ve_boz(kuyruk=None):
     producer = SimulationProducer(kuyruk)

@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 kalite_raporlari.db
 uretim_bandi/
+kurtarilan_urunler/
 ayrilan_fireler/
 
 .vscode/

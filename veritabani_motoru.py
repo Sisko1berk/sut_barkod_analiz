@@ -16,7 +16,7 @@ class DatabaseManager:
             with open('config.json', 'r', encoding='utf-8') as f:
                 return json.load(f)
         except Exception as e:
-            self.logger.error(f"Config dosyası okunamadı: {e}")
+            self.logger.error(f"Config dosyasi okunamadi: {e}")
             return {}
 
     def kurulum(self):
@@ -39,9 +39,9 @@ class DatabaseManager:
             ''')
             conn.commit()
             conn.close()
-            self.logger.info("Veritabanı bağlantısı sağlandı ve tablolar hazır.")
+            self.logger.info("Veritabani baglantisi saglandi ve tablolar hazir.")
         except Exception as e:
-            self.logger.error(f"Veritabanı kurulumunda hata: {e}")
+            self.logger.error(f"Veritabani kurulumunda hata: {e}")
 
     def log_ekle(self, urun_barkodu, isleme_suresi_ms, kalite_durumu, hata_kodu="YOK", guven_skoru=99.9, aciklama="-"):
         try:
@@ -50,8 +50,8 @@ class DatabaseManager:
             su_an = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             
             saat = datetime.datetime.now().hour
-            if 8 <= saat < 16: vardiya = "GÜNDÜZ_08-16"
-            elif 16 <= saat < 24: vardiya = "AKŞAM_16-24"
+            if 8 <= saat < 16: vardiya = "GUNDUZ_08-16"
+            elif 16 <= saat < 24: vardiya = "AKSAM_16-24"
             else: vardiya = "GECE_24-08"
             
             cursor.execute('''
@@ -63,7 +63,7 @@ class DatabaseManager:
             conn.close()
             self.logger.debug(f"DB Log eklendi: {urun_barkodu} - {kalite_durumu}")
         except Exception as e:
-            self.logger.error(f"Log eklenirken veritabanı hatası: {e}")
+            self.logger.error(f"Log eklenirken veritabani hatasi: {e}")
 
 if __name__ == '__main__':
     db = DatabaseManager()
